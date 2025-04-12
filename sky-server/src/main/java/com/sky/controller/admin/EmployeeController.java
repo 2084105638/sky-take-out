@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,13 +109,41 @@ public class EmployeeController {
      * 修改员工状态
      *
      * @param status,id
-     * @return Result<PageResult>
+     * @return Result<>
      */
     @ApiOperation("修改员工状态")
     @PostMapping("/status/{status}")
     public Result<?> changeStatus(@PathVariable("status") int status, Long id){
         log.info("修改员工状态");
         employeeService.changeStatus(status,id);
+        return Result.success();
+    }
+
+    /**
+     * 根据ID查询员工
+     *
+     * @param
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据ID查询员工")
+    public Result<Employee> getById(@PathVariable long id){
+        log.info("根据ID查询员工");
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 编辑员工
+     *
+     * @param
+     * @return Result
+     */
+    @ApiOperation("编辑员工信息")
+    @PutMapping
+    public Result<?> changeEmployee(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息");
+        employeeService.changeEmployee(employeeDTO);
         return Result.success();
     }
 }

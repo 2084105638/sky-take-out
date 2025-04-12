@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
+import lombok.extern.java.Log;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -46,4 +47,11 @@ public interface EmployeeMapper {
      */
     void update(Employee employee);
 
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+    @Select("select * from sky_take_out.employee where id=#{id}")
+    Employee getById(Long id);
 }
