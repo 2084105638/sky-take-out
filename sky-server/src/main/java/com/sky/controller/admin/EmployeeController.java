@@ -116,7 +116,7 @@ public class EmployeeController {
 //    @AutoFill(OperationType.UPDATE)
     @ApiOperation("修改员工状态")
     @PostMapping("/status/{status}")
-    public Result<?> changeStatus(@PathVariable("status") int status, Long id){
+    public Result<?> changeStatus(@PathVariable int status, Long id){
         log.info("修改员工状态");
         employeeService.changeStatus(status,id);
         return Result.success();
