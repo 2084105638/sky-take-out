@@ -6,7 +6,9 @@ import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.result.PageResult;
 import lombok.extern.java.Log;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface EmployeeService {
 
     /**

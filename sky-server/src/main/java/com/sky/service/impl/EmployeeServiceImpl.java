@@ -22,13 +22,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
+    @Resource
     private EmployeeMapper employeeMapper;
 
     /**
@@ -124,6 +125,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = Employee.builder()
                             .status(status)
                             .id(id)
+                            .updateTime(LocalDateTime.now())
+                            .updateUser(BaseContext.getCurrentId())
                             .build();
         employeeMapper.update(employee);
     }
