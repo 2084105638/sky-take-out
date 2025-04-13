@@ -2,6 +2,7 @@ package com.sky.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.sky.annotation.AutoFill;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
@@ -10,6 +11,7 @@ import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
+import com.sky.enumeration.OperationType;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
 import com.sky.exception.PasswordErrorException;
@@ -82,13 +84,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //添加状态
         employee.setStatus(StatusConstant.ENABLE);
-        //创建日期
-        employee.setCreateTime(LocalDateTime.now());
-        //更新日期
-        employee.setUpdateTime(LocalDateTime.now());
-        //创建人ID和修改人ID
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setCreateUser(BaseContext.getCurrentId());
         //设置密码
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
@@ -125,8 +120,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = Employee.builder()
                             .status(status)
                             .id(id)
-                            .updateTime(LocalDateTime.now())
-                            .updateUser(BaseContext.getCurrentId())
                             .build();
         employeeMapper.update(employee);
     }

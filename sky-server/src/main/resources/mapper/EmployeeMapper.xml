@@ -10,7 +10,7 @@
             </if>
         </where>
     </select>
-    <update id="update" parameterType="Employee">
+    <update id="update">
         update sky_take_out.employee
         <set>
             <if test="name != null">name = #{name},</if>

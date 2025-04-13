@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sky.mapper.CategoryMapper">
 <!--    修改操作-->
-    <update id="changeCategory" parameterType="category">
+    <update id="update" parameterType="category">
         update sky_take_out.category
         <set>
             <if test="type != null">type = #{type},</if>
