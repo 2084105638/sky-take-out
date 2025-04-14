@@ -7,7 +7,9 @@ import com.sky.result.Result;
 import com.sky.service.DishService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -48,5 +50,17 @@ public class DishController {
         log.info("分页获取菜品");
         PageResult dish = dishService.getDish(dishPageQueryDTO);
         return Result.success(dish);
+    }
+    /**
+     * 通过id删除菜品
+     * @param id
+     */
+
+    @ApiOperation("通过id删除菜品")
+    @DeleteMapping
+    public Result<String> deleteById(Integer id){
+        log.info("通过id删除菜品");
+        dishService.deleteById(id);
+        return Result.success();
     }
 }
