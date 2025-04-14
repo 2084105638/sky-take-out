@@ -25,5 +25,5 @@ public interface DishFlavorMapper {
      * @param dishId
      */
     @Delete("delete from sky_take_out.dish_flavor where dish_id=#{dishId}")
-    void deleteByDishId(Integer dishId);
+    void deleteByDishId(Long dishId);
 }

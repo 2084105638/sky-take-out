@@ -10,6 +10,9 @@ import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.result.PageResult;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface DishService {
     /**
      * 新增菜品和对应的口味数据
@@ -27,6 +30,6 @@ public interface DishService {
      * 通过id删除菜品
      * @param id
      */
-    public void deleteById(Integer id);
+    public void deleteById(ArrayList<Long> id);
 
 }

@@ -3,6 +3,8 @@ package com.sky.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /*
  * @author Sylphy
  * @Description
@@ -16,6 +18,14 @@ public interface SetmealMapper {
      * @param categoryId
      * @return Integer
      */
-    @Select("select * from sky_take_out.setmeal where category_id=#{categoryId}")
+    @Select("select count(setmeal.id) from sky_take_out.setmeal where category_id=#{categoryId}")
     Integer countByCategoryId(Long categoryId);
+
+
+    /**
+     * 通过菜品id查询套餐id
+     * @param DishId
+     */
+    @Select("select sky_take_out.setmeal_dish.setmeal_id from sky_take_out.setmeal_dish where dish_id=#{DishId}")
+    List<Long> countByDishId(Long DishId);
 }

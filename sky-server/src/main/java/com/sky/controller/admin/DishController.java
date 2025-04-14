@@ -13,6 +13,8 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * @author Sylphy
@@ -53,14 +55,14 @@ public class DishController {
     }
     /**
      * 通过id删除菜品
-     * @param id
+     * @param ids
      */
 
     @ApiOperation("通过id删除菜品")
     @DeleteMapping
-    public Result<String> deleteById(Integer id){
+    public Result<String> deleteById(@RequestParam ArrayList<Long> ids){
         log.info("通过id删除菜品");
-        dishService.deleteById(id);
+        dishService.deleteById(ids);
         return Result.success();
     }
 }

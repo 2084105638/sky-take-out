@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -23,11 +24,19 @@ import java.util.List;
 public interface DishMapper {
 
     /**
+     * 通过菜品id查询菜品
+     * @param id
+     * @return
+     */
+    @Select("select * from sky_take_out.dish where id=#{id}")
+    DishVO getById(Long id);
+
+    /**
      * 根据分类id查询菜品数量
      * @param categoryId
      * @return Integer
      */
-    @Select("select * from sky_take_out.dish where category_id=#{categoryId}")
+    @Select("select COUNT(id) from sky_take_out.dish where category_id=#{categoryId}")
     Integer countByCategoryId(Long categoryId);
 
     /**
@@ -55,7 +64,7 @@ public interface DishMapper {
      * @param id
      */
     @Delete("delete from sky_take_out.dish where id=#{id}")
-    void deleteById(Integer id);
+    void deleteById(Long id);
 
 
 
