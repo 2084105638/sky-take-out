@@ -10,6 +10,7 @@ import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
+import com.sky.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -52,12 +53,23 @@ public class DishServiceImpl implements DishService {
 
     /**
      * 分页获取菜品
-     * @param
+     * @param dishPageQueryDTO
+     * @return
      */
     @Override
     public PageResult getDish(DishPageQueryDTO dishPageQueryDTO) {
         PageHelper.startPage(dishPageQueryDTO.getPage(),dishPageQueryDTO.getPageSize());
-        Page<Dish> dishes = dishMapper.pageQuery(dishPageQueryDTO);
+        Page<DishVO> dishes = dishMapper.pageQuery(dishPageQueryDTO);
         return new PageResult(dishes.getTotal(),dishes.getResult());
+    }
+
+    /**
+     * 通过id删除菜品
+     * @param id
+     */
+    @Override
+    public void deleteById(Integer id){
+       dishMapper.deleteById(id);
+       dishFlavorMapper.deleteByDishId(id);
     }
 }

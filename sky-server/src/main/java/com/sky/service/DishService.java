@@ -22,4 +22,11 @@ public interface DishService {
      * @param
      */
     PageResult getDish(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     * 通过id删除菜品
+     * @param id
+     */
+    public void deleteById(Integer id);
+
 }

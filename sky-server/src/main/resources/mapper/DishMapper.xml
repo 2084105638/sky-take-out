@@ -10,12 +10,28 @@
         values
         (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})
     </insert>
-    <select id="pageQuery" resultType="com.sky.entity.Dish">
-        select * from sky_take_out.dish
+    <update id="update">
+        update sky_take_out.dish
+        <set>
+            <if test="name != null || name !=''">name=#{name}</if>
+            <if test=""></if>
+        </set>
+    </update>
+
+<!--    三种查询方法-->
+    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+        select D.*,c.name as categoryName from sky_take_out.dish D left outer join sky_take_out.category c on D.category_id=c.id
         <where>
             <if test="name != null and name != ''">
-                and name like concat('%',#{name},'%')
+                and D.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and D.category_id=#{categoryId}
+            </if>
+            <if test="status != null">
+                and D.status=#{status}
             </if>
         </where>
+        order by D.create_time desc
     </select>
 </mapper>
