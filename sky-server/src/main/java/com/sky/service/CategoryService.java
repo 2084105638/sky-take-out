@@ -30,7 +30,7 @@ public interface CategoryService {
      * 通过id删除分类
      * @param
      */
-    void deleteById(Long id);
+    void deleteCategoryById(Long id);
 
     /**
      * 修改分类

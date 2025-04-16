@@ -72,7 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
      * 通过id删除分类
      * @param
      */
-    public void deleteById(Long id){
+    public void deleteCategoryById(Long id){
         Integer count = dishMapper.countByCategoryId(id);
         if (count > 0){
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);

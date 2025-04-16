@@ -5,15 +5,13 @@ import com.sky.dto.DishPageQueryDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
+import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -57,12 +55,38 @@ public class DishController {
      * 通过id删除菜品
      * @param ids
      */
-
     @ApiOperation("通过id删除菜品")
     @DeleteMapping
-    public Result<String> deleteById(@RequestParam ArrayList<Long> ids){
+    public Result<String> deleteById(@RequestParam List<Long> ids){
         log.info("通过id删除菜品");
         dishService.deleteById(ids);
+        return Result.success();
+    }
+
+    /**
+     * 通过id查询菜品
+     * @param id
+     * @return
+     */
+    @ApiOperation("通过id查询菜品")
+    @GetMapping("/{id}")
+    public Result<DishVO> getDishById(@PathVariable Long id){
+        log.info("通过id查询菜品");
+        DishVO dishById = dishService.getDishById(id);
+        return Result.success(dishById);
+    }
+
+
+    /**
+     * 修改菜品
+     * @param dishDTO
+     * @return
+     */
+    @ApiOperation("修改菜品")
+    @PutMapping
+    public Result<String> changeDish(@RequestBody DishDTO dishDTO){
+        log.info("通修改菜品");
+        dishService.changeDish(dishDTO);
         return Result.success();
     }
 }

@@ -45,7 +45,7 @@ public interface EmployeeService {
      * @param id
      * @return
      */
-    Employee getById(Long id);
+    Employee getEmployeeById(Long id);
 
     /**
      * 编辑员工信息

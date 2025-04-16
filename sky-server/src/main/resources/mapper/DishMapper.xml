@@ -10,12 +10,19 @@
         values
         (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})
     </insert>
+
     <update id="update">
         update sky_take_out.dish
         <set>
-            <if test="name != null || name !=''">name=#{name}</if>
-            <if test=""></if>
+            <if test="name != null || name !=''">name=#{name},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="image != null">image=#{image},</if>
+            <if test="description != null">description=#{description},</if>
+            <if test="status != null">status=#{status}</if>
         </set>
+        <where>
+            id=#{id}
+        </where>
     </update>
 
 <!--    三种查询方法-->

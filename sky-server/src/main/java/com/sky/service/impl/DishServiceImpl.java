@@ -78,10 +78,9 @@ public class DishServiceImpl implements DishService {
      */
     @Transactional
     @Override
-    public void deleteById(ArrayList<Long> ids){
+    public void deleteById(List<Long> ids){
         for (Long id: ids) {
-            DishVO dishVO = dishMapper.getById(id);
-            Long id1 = dishVO.getId();
+            DishVO dishVO = dishMapper.getDishById(id);
             Integer status = dishVO.getStatus();
             if(status.equals(StatusConstant.ENABLE)){
                 //当前菜品处于起售中
@@ -94,7 +93,39 @@ public class DishServiceImpl implements DishService {
             }
 
             dishMapper.deleteById(id);
-            dishFlavorMapper.deleteByDishId(id);
+            dishFlavorMapper.deleteflavoByDishId(id);
         }
     }
+
+    /**
+     * 通过id查询菜品
+     * @param id
+     * @return
+     */
+    @Override
+    public DishVO getDishById(Long id) {
+        DishVO byId = dishMapper.getDishById(id);
+        //添加返回菜品的口味信息
+        byId.setFlavors(dishFlavorMapper.getFlavorsByDishId(id));
+        return byId;
+    }
+
+    /**
+     * 修改菜品数据
+     * @param dish
+     */
+    @Transactional
+    @Override
+    public void changeDish(DishDTO dish) {
+        dishMapper.update(dish);
+        //如果修改了口味
+        if(dish.getFlavors() != null){
+            //删除之前的口味
+            dishFlavorMapper.deleteflavoByDishId(dish.getId());
+            //重新添加口味
+            dishFlavorMapper.insertFlavor(dish.getFlavors(),dish.getId());
+        }
+    }
+
+
 }

@@ -87,7 +87,7 @@ public class EmployeeController {
      */
     @ApiOperation(value = "新增员工")
     @PostMapping
-    public Result save(@RequestBody EmployeeDTO employeeDTO){
+    public Result<String> save(@RequestBody EmployeeDTO employeeDTO){
         log.info("新增员工:{}",employeeDTO);
         employeeService.save(employeeDTO);
         return Result.success();
@@ -130,9 +130,9 @@ public class EmployeeController {
      */
     @GetMapping("/{id}")
     @ApiOperation("根据ID查询员工")
-    public Result<Employee> getById(@PathVariable long id){
+    public Result<Employee> getEmployeeById(@PathVariable long id){
         log.info("根据ID查询员工");
-        Employee employee = employeeService.getById(id);
+        Employee employee = employeeService.getEmployeeById(id);
         return Result.success(employee);
     }
 

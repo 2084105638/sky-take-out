@@ -2,6 +2,7 @@ package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
+import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
@@ -29,7 +30,7 @@ public interface DishMapper {
      * @return
      */
     @Select("select * from sky_take_out.dish where id=#{id}")
-    DishVO getById(Long id);
+    DishVO getDishById(Long id);
 
     /**
      * 根据分类id查询菜品数量
@@ -56,8 +57,8 @@ public interface DishMapper {
      * 修改菜品属性
      * @param dish
      */
-    @AutoFill(OperationType.UPDATE)
-    void update(Dish dish);
+//    @AutoFill(OperationType.UPDATE)
+    void update(DishDTO dish);
 
     /**
      * 通过id删除菜品
