@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Configuration
 @Slf4j
-public class WebMvcConfiguration extends WebMvcConfigurationSupport {
+public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
@@ -40,25 +40,25 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/admin/employee/login");
     }
 
-    /**
-     * 通过knife4j生成接口文档
-     * @return
-     */
-    @Bean
-    public Docket docket() {
-        ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("苍穹外卖项目接口文档")
-                .version("2.0")
-                .description("苍穹外卖项目接口文档")
-                .build();
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sky.controller"))
-                .paths(PathSelectors.any())
-                .build();
-        return docket;
-    }
+//    /**
+//     * 通过knife4j生成接口文档
+//     * @return
+//     */
+//    @Bean
+//    public Docket docket() {
+//        ApiInfo apiInfo = new ApiInfoBuilder()
+//                .title("苍穹外卖项目接口文档")
+//                .version("2.0")
+//                .description("苍穹外卖项目接口文档")
+//                .build();
+//        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+//                .apiInfo(apiInfo)
+//                .select()
+//                .apis(RequestHandlerSelectors.basePackage("com.sky.controller"))
+//                .paths(PathSelectors.any())
+//                .build();
+//        return docket;
+//    }
 
     /**
      * 设置静态资源映射
@@ -75,7 +75,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      */
 
     @Override
-    protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         log.info("扩展消息转换器");
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setObjectMapper(new JacksonObjectMapper());
